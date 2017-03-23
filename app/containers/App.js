@@ -3,6 +3,7 @@ import { Button, StatusBar, Image, View, ScrollView, StyleSheet, Text, Touchable
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import Header from '../components/Header'
+import PhotoGallery from '../components/PhotoGallery'
 // Redux
 import { actionCreators } from '../redux/appRedux'
 
@@ -19,7 +20,7 @@ class App extends Component {
         <Header>
           Image Edition
         </Header>
-        <ScrollView style={styles.ScrollContainer}>
+        {/*<ScrollView style={styles.ScrollContainer}>
           <Text style={styles.welcome}>
             Welcom to the Picture edition app
           </Text>
@@ -27,7 +28,8 @@ class App extends Component {
             title="Browse Pictures"
             color="lightsteelblue"
           />
-        </ScrollView>
+        </ScrollView>*/}
+        <PhotoGallery />
       </View>
     );
   }
