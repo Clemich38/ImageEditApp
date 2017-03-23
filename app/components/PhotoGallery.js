@@ -23,7 +23,7 @@ export default class PhotoGallery extends Component {
     this.fetchImages = this.fetchImages.bind(this)
     this.logError = this.logError.bind(this)
     this.selectImage = this.selectImage.bind(this)
-    this.go = this.go.bind(this)
+    this.displayGallery = this.displayGallery.bind(this)
   }
 
   // componentDidMount() {
@@ -31,7 +31,7 @@ export default class PhotoGallery extends Component {
   //   CameraRoll.getPhotos(this.state.fetchParams, this.fetchImages, this.logError);
   // }
 
-  go() {
+  displayGallery() {
     // get photos from the device photo gallery
     // CameraRoll.getPhotos(this.state.fetchParams, this.fetchImages, this.logError);
 
@@ -77,7 +77,7 @@ export default class PhotoGallery extends Component {
           <Button
             title="Browse Pictures"
             color="lightsteelblue"
-            onPress={this.go}
+            onPress={this.displayGallery}
           />
           <View style={styles.imageGrid}>
             {this.state.imagesArray.map(image => {
