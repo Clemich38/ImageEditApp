@@ -23,10 +23,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightsteelblue',
   },
   title: {
-    fontFamily: 'Trebuchet-BoldItalic',
-    fontSize: 30,
+    fontSize: 20,
     textAlign: 'center',
     color: 'white',
-    fontWeight: 'bold',
   },
 })

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { StatusBar, Image, View, ScrollView, StyleSheet, Text, TouchableOpacity, Navigator, BackAndroid } from 'react-native'
+import { Button, StatusBar, Image, View, ScrollView, StyleSheet, Text, TouchableOpacity, Navigator, BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import Header from '../components/Header'
@@ -19,10 +19,14 @@ class App extends Component {
         <Header>
           Image Edition
         </Header>
-        <ScrollView>
+        <ScrollView style={styles.ScrollContainer}>
           <Text style={styles.welcome}>
-            Welcome to Yo!
+            Welcom to the Picture edition app
           </Text>
+          <Button
+            title="Browse Pictures"
+            color="lightsteelblue"
+          />
         </ScrollView>
       </View>
     );
@@ -33,8 +37,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  ScrollContainer: {
+    flex: 1,
+    paddingTop: 25,
+    paddingBottom: 25,
+  },
   welcome: {
-    fontSize: 20,
     textAlign: 'center',
     margin: 10,
   },
