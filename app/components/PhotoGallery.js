@@ -80,9 +80,9 @@ export default class PhotoGallery extends Component {
             onPress={this.displayGallery}
           />
           <View style={styles.imageGrid}>
-            {this.state.imagesArray.map(image => {
+            {this.state.imagesArray.map((image, index) => {
               return (
-                <TouchableHighlight onPress={() => this.selectImage(image.uri)}>
+                <TouchableHighlight key={index} onPress={() => this.selectImage(image.uri)}>
                   <Image style={styles.image} source={{ uri: image.uri }} />
                 </TouchableHighlight>
               );
