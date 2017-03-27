@@ -4,6 +4,11 @@ import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import Header from '../components/Header'
 import PhotoGallery from '../components/PhotoGallery'
+
+// Pages
+import Home from '../pages/Home'
+import SelectPage from '../pages/SelectPage'
+
 // Redux
 import { actionCreators } from '../redux/appRedux'
 
@@ -14,26 +19,53 @@ const mapStateToProps = (state) => ({
 
 class App extends Component {
 
+
+  renderScene(route, navigator) {
+    var routeId = route.id;
+    if (routeId === 'Home') {
+      return (
+        <Home
+          navigator={navigator} />
+      );
+    }
+    if (routeId === 'SelectPage') {
+      return (
+        <SelectPage
+          navigator={navigator} />
+      );
+    }
+    return this.noRoute(navigator);
+
+  }
+
+
   render() {
     return (
-      <View style={styles.container}>
-        <Header>
-          Image Edition
-        </Header>
-        {/*<ScrollView style={styles.ScrollContainer}>
-          <Text style={styles.welcome}>
-            Welcom to the Picture edition app
-          </Text>
-          <Button
-            title="Browse Pictures"
-            color="lightsteelblue"
-          />
-        </ScrollView>*/}
-        <PhotoGallery />
+      <Navigator
+        initialRoute={{ id: 'Home', name: 'Home' }}
+        renderScene={this.renderScene.bind(this)}
+        configureScene={(route) => {
+          if (route.sceneConfig) {
+            return route.sceneConfig;
+          }
+          return Navigator.SceneConfigs.FloatFromRight;
+        }} />
+    );
+  }
+
+  noRoute(navigator) {
+    return (
+      <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
+        <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+          onPress={() => navigator.pop()}>
+          <Text style={{ color: 'red', fontWeight: 'bold' }}>请在 index.js 的 renderScene 中配置这个页面的路由</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
+
+
 
 const styles = StyleSheet.create({
   container: {

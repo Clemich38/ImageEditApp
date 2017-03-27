@@ -26,10 +26,11 @@ export default class PhotoGallery extends Component {
     this.displayGallery = this.displayGallery.bind(this)
   }
 
-  // componentDidMount() {
-  //   // get photos from the device photo gallery
-  //   CameraRoll.getPhotos(this.state.fetchParams, this.fetchImages, this.logError);
-  // }
+  componentDidMount() {
+    // get photos from the device photo gallery
+    // CameraRoll.getPhotos(this.state.fetchParams, this.fetchImages, this.logError);
+    this.displayGallery();
+  }
 
   displayGallery() {
     // get photos from the device photo gallery
@@ -71,14 +72,14 @@ export default class PhotoGallery extends Component {
   }
 
   render() {
+    
     return (
-      <View style={{ flex: 1, backgroundColor: 'white' }}>
         <ScrollView style={styles.container}>
-          <Button
+          {/*<Button
             title="Browse Pictures"
             color="lightsteelblue"
             onPress={this.displayGallery}
-          />
+          />*/}
           <View style={styles.imageGrid}>
             {this.state.imagesArray.map((image, index) => {
               return (
@@ -89,15 +90,14 @@ export default class PhotoGallery extends Component {
             })}
           </View>
         </ScrollView>
-      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
   },
   imageGrid: {
     flexDirection: 'row',
