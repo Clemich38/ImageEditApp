@@ -81,13 +81,15 @@ var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
     if (index > 0) {
       return (
-        <TouchableHighlight style={{ marginTop: 10 }} onPress={() => {
+        <TouchableOpacity style={{ marginTop: 10 }} onPress={() => {
           if (index > 0) {
             navigator.pop();
           }
         }}>
-          <Text>Back</Text>
-        </TouchableHighlight>
+          <Text style={{ color: 'white', marginTop: 5, marginLeft: 10, fontSize: 12 }}>
+            Back
+        </Text>
+        </TouchableOpacity>
       )
     } else {
       return null
@@ -98,11 +100,11 @@ var NavigationBarRouteMapper = {
   },
   Title(route, navigator, index, navState) {
     return (
-      <TouchableOpacity style={{ flex: 1, justifyContent: 'center' }}>
+      <View style={{ flex: 1, justifyContent: 'center' }}>
         <Text style={{ color: 'white', margin: 10, fontSize: 16 }}>
           Image Edition App
         </Text>
-      </TouchableOpacity>
+      </View>
     );
   }
 };
