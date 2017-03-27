@@ -3,10 +3,9 @@ import { Button, StatusBar, Image, View, ScrollView, StyleSheet, Text, Touchable
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import Header from '../components/Header'
-import PhotoGallery from '../components/PhotoGallery'
 
 // Pages
-import Home from '../pages/Home'
+import SelectPage from '../pages/SelectPage'
 
 // Redux
 import { actionCreators } from '../redux/appRedux'
@@ -16,25 +15,20 @@ const mapStateToProps = (state) => ({
   currentPageIndex: state.currentPageIndex,
 })
 
-class SelectPage extends Component {
+class EditPage extends Component {
 
   renderScene(route, navigator) {
     return (
       <View style={styles.container}>
-        <PhotoGallery onDisplayImage={this.gotoNext.bind(this)}/>
+        <Image style={styles.image} source={{ uri: 'assets-library://asset/asset.JPG?id=9F983DBA-EC35-42B8-8773-B597CF782EDD&ext=JPG' }} />
       </View>
     );
   }
 
+  // 'assets-library://asset/asset.JPG?id=9F983DBA-EC35-42B8-8773-B597CF782EDD&ext=JPG'
+
   goBack() {
     this.props.navigator.pop();
-  }
-
-  gotoNext() {
-    this.props.navigator.push({
-      id: 'EditPage',
-      name: 'EditPage',
-    });
   }
 
   render() {
@@ -61,21 +55,15 @@ var NavigationBarRouteMapper = {
     return (
       <TouchableOpacity style={{ flex: 1, justifyContent: 'center' }}>
         <Text style={{ color: 'white', margin: 10, fontSize: 16 }}>
-          SelectPage - Title
+          EditPage - Title
         </Text>
       </TouchableOpacity>
     );
   }
 };
-/*<View style={styles.container}>
-  <Header>
-    Image Edition
-  </Header>
-  <PhotoGallery />
-</View >*/
 
 const styles = StyleSheet.create({
-  
+
   container: {
     marginTop: 65,
     flex: 1,
@@ -85,11 +73,12 @@ const styles = StyleSheet.create({
     paddingTop: 25,
     paddingBottom: 25,
   },
-  welcome: {
-    textAlign: 'center',
+  image: {
+    width: 300,
+    height: 500,
     margin: 10,
   },
 
 })
 
-export default connect(mapStateToProps)(SelectPage)
+export default connect(mapStateToProps)(EditPage)

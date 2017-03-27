@@ -8,6 +8,7 @@ import PhotoGallery from '../components/PhotoGallery'
 // Pages
 import Home from '../pages/Home'
 import SelectPage from '../pages/SelectPage'
+import EditPage from '../pages/EditPage'
 
 // Redux
 import { actionCreators } from '../redux/appRedux'
@@ -31,6 +32,12 @@ class App extends Component {
     if (routeId === 'SelectPage') {
       return (
         <SelectPage
+          navigator={navigator} />
+      );
+    }
+    if (routeId === 'EditPage') {
+      return (
+        <EditPage
           navigator={navigator} />
       );
     }

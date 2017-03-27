@@ -64,22 +64,19 @@ export default class PhotoGallery extends Component {
   }
 
   selectImage(uri) {
+    const { onDisplayImage } = this.props
     // define whatever you want to happen when an image is selected here
     this.setState({
       selected: uri,
     });
     console.log('Selected image: ', uri);
+    onDisplayImage();
   }
 
   render() {
     
     return (
         <ScrollView style={styles.container}>
-          {/*<Button
-            title="Browse Pictures"
-            color="lightsteelblue"
-            onPress={this.displayGallery}
-          />*/}
           <View style={styles.imageGrid}>
             {this.state.imagesArray.map((image, index) => {
               return (
