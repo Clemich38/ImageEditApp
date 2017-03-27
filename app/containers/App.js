@@ -16,6 +16,7 @@ import { actionCreators } from '../redux/appRedux'
 // Map Redux states to props
 const mapStateToProps = (state) => ({
   currentPageIndex: state.currentPageIndex,
+  imageUrl: state.imageUrl
 })
 
 class App extends Component {

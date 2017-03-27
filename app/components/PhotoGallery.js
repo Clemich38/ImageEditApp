@@ -70,7 +70,7 @@ export default class PhotoGallery extends Component {
       selected: uri,
     });
     console.log('Selected image: ', uri);
-    onDisplayImage();
+    onDisplayImage(uri);
   }
 
   render() {

@@ -13,7 +13,7 @@ import { actionCreators } from '../redux/appRedux'
 
 // Map Redux states to props
 const mapStateToProps = (state) => ({
-  currentPageIndex: state.currentPageIndex,
+  imageUrl: state.imageUrl,
 })
 
 class SelectPage extends Component {
@@ -26,7 +26,9 @@ class SelectPage extends Component {
     );
   }
 
-  gotoNext() {
+  gotoNext(uri) {
+    const { dispatch } = this.props
+    dispatch(actionCreators.setImageUrl(uri));
     this.props.navigator.push({
       id: 'EditPage',
       name: 'EditPage',

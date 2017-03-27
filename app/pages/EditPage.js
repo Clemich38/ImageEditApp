@@ -31,22 +31,73 @@ const filters = [
 
 // Map Redux states to props
 const mapStateToProps = (state) => ({
-  currentPageIndex: state.currentPageIndex,
+  imageUrl: state.imageUrl,
 })
 
 class EditPage extends Component {
 
   render() {
+    const { imageUrl } = this.props
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Surface width={256} height={171}>
           <Saturation
             factor={0}
-            image={{ uri: "assets-library://asset/asset.JPG?id=9F983DBA-EC35-42B8-8773-B597CF782EDD&ext=JPG" }}
+            image={{ uri: imageUrl }}
+          />
+        </Surface><Surface width={256} height={171}>
+          <Saturation
+            factor={0.1}
+            image={{ uri: imageUrl }}
+          />
+        </Surface><Surface width={256} height={171}>
+          <Saturation
+            factor={0.2}
+            image={{ uri: imageUrl }}
+          />
+        </Surface><Surface width={256} height={171}>
+          <Saturation
+            factor={0.3}
+            image={{ uri: imageUrl }}
+          />
+        </Surface><Surface width={256} height={171}>
+          <Saturation
+            factor={0.4}
+            image={{ uri: imageUrl }}
+          />
+        </Surface><Surface width={256} height={171}>
+          <Saturation
+            factor={0.5}
+            image={{ uri: imageUrl }}
+          />
+        </Surface><Surface width={256} height={171}>
+          <Saturation
+            factor={0.6}
+            image={{ uri: imageUrl }}
+          />
+        </Surface><Surface width={256} height={171}>
+          <Saturation
+            factor={0.7}
+            image={{ uri: imageUrl }}
+          />
+        </Surface><Surface width={256} height={171}>
+          <Saturation
+            factor={0.8}
+            image={{ uri: imageUrl }}
+          />
+        </Surface><Surface width={256} height={171}>
+          <Saturation
+            factor={0.9}
+            image={{ uri: imageUrl }}
+          />
+        </Surface><Surface width={256} height={171}>
+          <Saturation
+            factor={1}
+            image={{ uri: imageUrl }}
           />
         </Surface>
         {/*<FitImage style={styles.image} source={{ uri: 'assets-library://asset/asset.JPG?id=9F983DBA-EC35-42B8-8773-B597CF782EDD&ext=JPG' }} />*/}
-      </View>
+      </ScrollView>
     );
   }
 }
