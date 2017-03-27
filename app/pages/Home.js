@@ -18,7 +18,7 @@ const mapStateToProps = (state) => ({
 
 class Home extends Component {
 
-  renderScene(route, navigator) {
+  render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Button
@@ -37,7 +37,7 @@ class Home extends Component {
     });
   }
 
-  render() {
+  /*render() {
     return (
       <Navigator
         renderScene={this.renderScene.bind(this)}
@@ -46,7 +46,7 @@ class Home extends Component {
             routeMapper={NavigationBarRouteMapper} />
         } />
     );
-  }
+  }*/
 }
 
 

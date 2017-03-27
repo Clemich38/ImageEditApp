@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Button, StatusBar, Image, View, ScrollView, StyleSheet, Text, TouchableOpacity, Navigator, BackAndroid } from 'react-native'
+import { Button, StatusBar, Image, View, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, Navigator, BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import Header from '../components/Header'
@@ -17,50 +17,14 @@ const mapStateToProps = (state) => ({
 
 class EditPage extends Component {
 
-  renderScene(route, navigator) {
+  render() {
     return (
       <View style={styles.container}>
         <Image style={styles.image} source={{ uri: 'assets-library://asset/asset.JPG?id=9F983DBA-EC35-42B8-8773-B597CF782EDD&ext=JPG' }} />
       </View>
     );
   }
-
-  // 'assets-library://asset/asset.JPG?id=9F983DBA-EC35-42B8-8773-B597CF782EDD&ext=JPG'
-
-  goBack() {
-    this.props.navigator.pop();
-  }
-
-  render() {
-    return (
-      <Navigator
-        renderScene={this.renderScene.bind(this)}
-        navigationBar={
-          <Navigator.NavigationBar style={{ backgroundColor: 'lightsteelblue', alignItems: 'center' }}
-            routeMapper={NavigationBarRouteMapper} />
-        } />
-    );
-  }
 }
-
-
-var NavigationBarRouteMapper = {
-  LeftButton(route, navigator, index, navState) {
-    return null;
-  },
-  RightButton(route, navigator, index, navState) {
-    return null;
-  },
-  Title(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity style={{ flex: 1, justifyContent: 'center' }}>
-        <Text style={{ color: 'white', margin: 10, fontSize: 16 }}>
-          EditPage - Title
-        </Text>
-      </TouchableOpacity>
-    );
-  }
-};
 
 const styles = StyleSheet.create({
 

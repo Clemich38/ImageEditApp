@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Button, StatusBar, Image, View, ScrollView, StyleSheet, Text, TouchableOpacity, Navigator, BackAndroid } from 'react-native'
+import { Button, StatusBar, Image, View, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, Navigator, BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import Header from '../components/Header'
@@ -55,8 +55,13 @@ class App extends Component {
           if (route.sceneConfig) {
             return route.sceneConfig;
           }
-          return Navigator.SceneConfigs.FloatFromRight;
-        }} />
+          return Navigator.SceneConfigs.HorizontalSwipeJump;
+        
+        }} 
+        navigationBar={
+          <Navigator.NavigationBar style={{ backgroundColor: 'lightsteelblue', alignItems: 'center' }}
+            routeMapper={NavigationBarRouteMapper} />
+        } />
     );
   }
 
@@ -72,7 +77,35 @@ class App extends Component {
   }
 }
 
-
+var NavigationBarRouteMapper = {
+  LeftButton(route, navigator, index, navState) {
+    if (index > 0) {
+      return (
+        <TouchableHighlight style={{ marginTop: 10 }} onPress={() => {
+          if (index > 0) {
+            navigator.pop();
+          }
+        }}>
+          <Text>Back</Text>
+        </TouchableHighlight>
+      )
+    } else {
+      return null
+    }
+  },
+  RightButton(route, navigator, index, navState) {
+    return null;
+  },
+  Title(route, navigator, index, navState) {
+    return (
+      <TouchableOpacity style={{ flex: 1, justifyContent: 'center' }}>
+        <Text style={{ color: 'white', margin: 10, fontSize: 16 }}>
+          Image Edition App
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+};
 
 const styles = StyleSheet.create({
   container: {

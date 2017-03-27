@@ -38,7 +38,7 @@ export default class PhotoGallery extends Component {
 
     CameraRoll.getPhotos({
       first: 10,
-      groupTypes: 'SavedPhotos',
+      // groupTypes: 'SavedPhotos',
       assetType: 'Photos' }).then(
       (data) => {
         console.log(data);
@@ -50,7 +50,7 @@ export default class PhotoGallery extends Component {
     );
   }
 
-  // callback which processes received images from camera roll and stores them in an array
+  // Callback which processes received images from camera roll and stores them in an array
   fetchImages(data) {
     const assets = data.edges;
     const tmpImagesArray = assets.map(asset => asset.node.image);

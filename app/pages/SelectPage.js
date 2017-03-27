@@ -18,16 +18,12 @@ const mapStateToProps = (state) => ({
 
 class SelectPage extends Component {
 
-  renderScene(route, navigator) {
+  render() {
     return (
       <View style={styles.container}>
         <PhotoGallery onDisplayImage={this.gotoNext.bind(this)}/>
       </View>
     );
-  }
-
-  goBack() {
-    this.props.navigator.pop();
   }
 
   gotoNext() {
@@ -37,42 +33,8 @@ class SelectPage extends Component {
     });
   }
 
-  render() {
-    return (
-      <Navigator
-        renderScene={this.renderScene.bind(this)}
-        navigationBar={
-          <Navigator.NavigationBar style={{ backgroundColor: 'lightsteelblue', alignItems: 'center' }}
-            routeMapper={NavigationBarRouteMapper} />
-        } />
-    );
-  }
 }
 
-
-var NavigationBarRouteMapper = {
-  LeftButton(route, navigator, index, navState) {
-    return null;
-  },
-  RightButton(route, navigator, index, navState) {
-    return null;
-  },
-  Title(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity style={{ flex: 1, justifyContent: 'center' }}>
-        <Text style={{ color: 'white', margin: 10, fontSize: 16 }}>
-          SelectPage - Title
-        </Text>
-      </TouchableOpacity>
-    );
-  }
-};
-/*<View style={styles.container}>
-  <Header>
-    Image Edition
-  </Header>
-  <PhotoGallery />
-</View >*/
 
 const styles = StyleSheet.create({
   
