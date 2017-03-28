@@ -26,7 +26,7 @@ const shaders = GL.Shaders.create({
         vec3 black = vec3(0., 0., 0.);
         vec3 middle = vec3(0.5, 0.5, 0.5);
         float luminance = dot(color, W);
-        vec3 gray = vec3(luminance, luminance, luminance);
+        vec3 gray = vec3(luminance);
         
         vec3 brtColor = mix(black, color, brt);
         vec3 conColor = mix(middle, brtColor, con);
@@ -46,18 +46,6 @@ const shaders = GL.Shaders.create({
         return filter_result;
       }
 
-      vec3 ovelayBlender(vec3 Color, vec3 filter){
-        vec3 filter_result;
-        float luminance = dot(filter, W);
-        
-        if(luminance < 0.5)
-          filter_result = 2. * filter * Color;
-        else
-          filter_result = 1. - (1. - (2. *(filter - 0.5)))*(1. - Color);
-          
-        return filter_result;
-      }
-
       vec3 applyHue(vec3 Color, float h) {
         vec3 yColor = rgb2yiq * Color;
         float originalHue = atan(yColor.b, yColor.g);
@@ -69,7 +57,7 @@ const shaders = GL.Shaders.create({
 
       vec3 applyGray(vec3 Color, float g) {
         float gray = dot(Color, vec3(0.299, 0.587, 0.114));
-        return mix(Color, vec3(gray, gray, gray), g);
+        return mix(Color, vec3(gray), g);
       }
 
       vec3 applySepia(vec3 Color, float s) {
