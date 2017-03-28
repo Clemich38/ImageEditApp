@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { CameraRoll, Button, StatusBar, Image, View, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, Navigator, BackAndroid } from 'react-native'
+import { Slider, CameraRoll, Button, StatusBar, Image, View, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, Navigator, BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import FitImage from 'react-native-fit-image';
@@ -16,19 +16,6 @@ import SelectPage from '../pages/SelectPage'
 // Redux
 import { actionCreators } from '../redux/appRedux'
 
-// Filters
-const filters = [
-  {
-    name: 'Saturate',
-    component: Saturation,
-    props: {
-      factor: 0.7
-    }
-  }
-]
-
-
-
 
 // Map Redux states to props
 const mapStateToProps = (state) => ({
@@ -36,6 +23,12 @@ const mapStateToProps = (state) => ({
 })
 
 class EditPage extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { saturation: 1 };
+
+  }
 
   saveEditedImage() {
     const { imageUrl } = this.props
@@ -57,10 +50,19 @@ class EditPage extends Component {
       <ScrollView style={styles.container}>
         <Surface ref="surface" width={256} height={171}>
           <Saturation
-            factor={0}
+            factor={this.state.saturation}
             image={{ uri: imageUrl }}
           />
         </Surface>
+        <View>
+          <Text>Saturation: {this.state.saturation}</Text>
+          <Slider
+            value={this.state.saturation}
+            minimumValue={0}
+            maximumValue={2}
+            onValueChange={(saturation) => this.setState({ saturation: saturation })}
+          />
+        </View>
         <Button
           title="Save"
           color="lightsteelblue"
