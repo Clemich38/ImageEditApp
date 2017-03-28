@@ -54,7 +54,7 @@ class EditPage extends Component {
       <ScrollView style={styles.container}>
         <Surface ref="surface" width={256} height={171}>
           <Saturation
-            factor={this.state.saturation}
+            saturation={this.state.saturation}
             image={{ uri: imageUrl }}
           />
         </Surface>
@@ -77,32 +77,6 @@ class EditPage extends Component {
           color="lightsteelblue"
           onPress={this.resetState}
         />
-        {/*<Surface width={256} height={171}>
-          <Saturation
-            factor={0.2}
-            image={{ uri: imageUrl }}
-          />
-        </Surface><Surface width={256} height={171}>
-          <Saturation
-            factor={0.4}
-            image={{ uri: imageUrl }}
-          />
-        </Surface><Surface width={256} height={171}>
-          <Saturation
-            factor={0.6}
-            image={{ uri: imageUrl }}
-          />
-        </Surface><Surface width={256} height={171}>
-          <Saturation
-            factor={0.8}
-            image={{ uri: imageUrl }}
-          />
-        </Surface><Surface width={256} height={171}>
-          <Saturation
-            factor={1}
-            image={{ uri: imageUrl }}
-          />
-        </Surface>*/}
         {/*<FitImage style={styles.image} source={{ uri: 'assets-library://asset/asset.JPG?id=9F983DBA-EC35-42B8-8773-B597CF782EDD&ext=JPG' }} />*/}
       </ScrollView>
     );
