@@ -7,12 +7,20 @@ const shaders = GL.Shaders.create({
       precision highp float;
       varying vec2 uv;
       uniform sampler2D image;
+
       uniform float saturation;
+      uniform float brightness;
+      uniform float contrast;
+
+      const vec3 W = vec3(0.2125, 0.7154, 0.0721);
+
       void main () {
-        vec4 c = texture2D(image, uv);
+        vec4 color = texture2D(image, uv);
+        float luminance = dot(color.rgb, W);
+        vec3 gray = vec3(luminance);
+
         // Algorithm from Chapter 16 of OpenGL Shading Language
-        const vec3 W = vec3(0.2125, 0.7154, 0.0721);
-        gl_FragColor = vec4(mix(vec3(dot(c.rgb, W)), c.rgb, saturation), c.a);
+        gl_FragColor = vec4(mix(gray, color.rgb, saturation), color.a);
       }
     `
   }

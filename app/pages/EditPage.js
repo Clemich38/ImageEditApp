@@ -8,7 +8,7 @@ import { Surface } from "gl-react-native"
 const { Image: GLImage } = require("gl-react-image")
 var RNFS = require('react-native-fs');
 
-import Saturation from '../components/filters/Saturation'
+import AdjustFilter from '../components/filters/AdjustFilter'
 
 // Pages
 import SelectPage from '../pages/SelectPage'
@@ -26,12 +26,26 @@ class EditPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { saturation: 1 };
+    this.state = {
+      saturation: 1,
+      brightness: 1,
+      contrast: 1,
+      hue: 0,
+      sepia: 0,
+      gray: 0,
+      mixFactor: 0 };
 
   }
 
   resetState = () => {
-    this.setState({ saturation: 1 })
+    this.setState({
+      saturation: 1,
+      brightness: 1,
+      contrast: 1,
+      hue: 0,
+      sepia: 0,
+      gray: 0,
+      mixFactor: 0 })
   }
 
   saveEditedImage() {
@@ -53,8 +67,14 @@ class EditPage extends Component {
     return (
       <ScrollView style={styles.container}>
         <Surface ref="surface" width={256} height={171}>
-          <Saturation
+          <AdjustFilter
             saturation={this.state.saturation}
+            brightness={this.state.brightness}
+            contrast={this.state.contrast}
+            hue={this.state.hue}
+            sepia={this.state.sepia}
+            gray={this.state.gray}
+            mixFactor={this.state.mixFactor}
             image={{ uri: imageUrl }}
           />
         </Surface>
@@ -65,6 +85,41 @@ class EditPage extends Component {
             minimumValue={0}
             maximumValue={2}
             onValueChange={(saturation) => this.setState({ saturation: saturation })}
+          />
+          <Text>brightness: {this.state.brightness}</Text>
+          <Slider
+            value={this.state.brightness}
+            minimumValue={0}
+            maximumValue={2}
+            onValueChange={(brightness) => this.setState({ brightness: brightness })}
+          />
+          <Text>contrast: {this.state.contrast}</Text>
+          <Slider
+            value={this.state.contrast}
+            minimumValue={0}
+            maximumValue={2}
+            onValueChange={(contrast) => this.setState({ contrast: contrast })}
+          />
+          <Text>hue: {this.state.hue}</Text>
+          <Slider
+            value={this.state.hue}
+            minimumValue={0}
+            maximumValue={6}
+            onValueChange={(hue) => this.setState({ hue: hue })}
+          />
+          <Text>sepia: {this.state.sepia}</Text>
+          <Slider
+            value={this.state.sepia}
+            minimumValue={0}
+            maximumValue={1}
+            onValueChange={(sepia) => this.setState({ sepia: sepia })}
+          />
+          <Text>gray: {this.state.gray}</Text>
+          <Slider
+            value={this.state.gray}
+            minimumValue={0}
+            maximumValue={1}
+            onValueChange={(gray) => this.setState({ gray: gray })}
           />
         </View>
         <Button
