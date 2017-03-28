@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import { Button, StatusBar, Image, View, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, Navigator, BackAndroid } from 'react-native'
+import { CameraRoll, Button, StatusBar, Image, View, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, Navigator, BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import FitImage from 'react-native-fit-image';
 import Header from '../components/Header'
 import { Surface } from "gl-react-native"
 const { Image: GLImage } = require("gl-react-image")
+var RNFS = require('react-native-fs');
 
 import Saturation from '../components/filters/Saturation'
 
@@ -36,28 +37,38 @@ const mapStateToProps = (state) => ({
 
 class EditPage extends Component {
 
+  saveEditedImage() {
+    const { imageUrl } = this.props
+    var path = RNFS.DocumentDirectoryPath + '/image.png';
+    this.refs.surface.captureFrame({ type: 'png', format: 'file', filePath: path, quality: 1 }).then(uri => {
+      console.log("DO SOMETHING WITH", uri);
+      var promise = CameraRoll.saveToCameraRoll(uri, 'photo');
+      promise.then(function (result) {
+        console.log('save succeeded ' + result);
+      }).catch(function (error) {
+        console.log('save failed ' + error);
+      });
+    });
+  }
+
   render() {
     const { imageUrl } = this.props
     return (
       <ScrollView style={styles.container}>
-        <Surface width={256} height={171}>
+        <Surface ref="surface" width={256} height={171}>
           <Saturation
             factor={0}
             image={{ uri: imageUrl }}
           />
-        </Surface><Surface width={256} height={171}>
-          <Saturation
-            factor={0.1}
-            image={{ uri: imageUrl }}
-          />
-        </Surface><Surface width={256} height={171}>
+        </Surface>
+        <Button
+          title="Save"
+          color="lightsteelblue"
+          onPress={this.saveEditedImage.bind(this)}
+        />
+        {/*<Surface width={256} height={171}>
           <Saturation
             factor={0.2}
-            image={{ uri: imageUrl }}
-          />
-        </Surface><Surface width={256} height={171}>
-          <Saturation
-            factor={0.3}
             image={{ uri: imageUrl }}
           />
         </Surface><Surface width={256} height={171}>
@@ -67,17 +78,7 @@ class EditPage extends Component {
           />
         </Surface><Surface width={256} height={171}>
           <Saturation
-            factor={0.5}
-            image={{ uri: imageUrl }}
-          />
-        </Surface><Surface width={256} height={171}>
-          <Saturation
             factor={0.6}
-            image={{ uri: imageUrl }}
-          />
-        </Surface><Surface width={256} height={171}>
-          <Saturation
-            factor={0.7}
             image={{ uri: imageUrl }}
           />
         </Surface><Surface width={256} height={171}>
@@ -87,15 +88,10 @@ class EditPage extends Component {
           />
         </Surface><Surface width={256} height={171}>
           <Saturation
-            factor={0.9}
-            image={{ uri: imageUrl }}
-          />
-        </Surface><Surface width={256} height={171}>
-          <Saturation
             factor={1}
             image={{ uri: imageUrl }}
           />
-        </Surface>
+        </Surface>*/}
         {/*<FitImage style={styles.image} source={{ uri: 'assets-library://asset/asset.JPG?id=9F983DBA-EC35-42B8-8773-B597CF782EDD&ext=JPG' }} />*/}
       </ScrollView>
     );
