@@ -30,6 +30,10 @@ class EditPage extends Component {
 
   }
 
+  resetState = () => {
+    this.setState({ saturation: 1 })
+  }
+
   saveEditedImage() {
     const { imageUrl } = this.props
     var path = RNFS.DocumentDirectoryPath + '/image.png';
@@ -67,6 +71,11 @@ class EditPage extends Component {
           title="Save"
           color="lightsteelblue"
           onPress={this.saveEditedImage.bind(this)}
+        />
+        <Button
+          title="Reset"
+          color="lightsteelblue"
+          onPress={this.resetState}
         />
         {/*<Surface width={256} height={171}>
           <Saturation
