@@ -100,6 +100,8 @@ const styles = StyleSheet.create({
   },
   image: {
     margin: 10,
+    resizeMode: "cover",
+    borderRadius: 10,
   },
   imageWrap: {
     width: 100,

@@ -33,8 +33,17 @@ class EditPage extends Component {
       hue: 0,
       sepia: 0,
       gray: 0,
-      mixFactor: 0 };
+      mixFactor: 0,
+      width:1,
+      height: 1,
+      transitionOver: false};
 
+  }
+
+  setTransitionOver () {
+    this.setState({
+      transitionOver: true
+    });
   }
 
   resetState = () => {
@@ -46,6 +55,18 @@ class EditPage extends Component {
       sepia: 0,
       gray: 0,
       mixFactor: 0 })
+  }
+
+  componentDidMount() {
+    Image.getSize(this.props.imageUrl, (width, height) => {
+      this.setState({ width, height });
+    });
+
+    this.didFocusSubscription = this.props.navigator.navigationContext.addListener('didfocus', this.setTransitionOver.bind(this));
+  }
+
+  componentWillUnmount() {
+    this.didFocusSubscription.remove();
   }
 
   saveEditedImage() {
@@ -62,11 +83,16 @@ class EditPage extends Component {
     });
   }
 
+
   render() {
     const { imageUrl } = this.props
     return (
-      <ScrollView style={styles.container}>
-        <Surface ref="surface" width={256} height={171}>
+      this.state.transitionOver && <ScrollView style={styles.container}>
+        <Text>
+          Size: {this.state.width}*{this.state.height}
+        </Text>
+
+        <Surface ref="surface" style={styles.cover} width={this.state.width/10} height={this.state.height/10}>
           <AdjustFilter
             saturation={this.state.saturation}
             brightness={this.state.brightness}
@@ -134,6 +160,7 @@ class EditPage extends Component {
         />
         {/*<FitImage style={styles.image} source={{ uri: 'assets-library://asset/asset.JPG?id=9F983DBA-EC35-42B8-8773-B597CF782EDD&ext=JPG' }} />*/}
       </ScrollView>
+      
     );
   }
 }
@@ -152,6 +179,13 @@ const styles = StyleSheet.create({
   image: {
     resizeMode: "contain"
   },
+  cover: {
+    // position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  }
 
 })
 

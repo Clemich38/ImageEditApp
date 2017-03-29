@@ -56,7 +56,7 @@ class App extends Component {
           if (route.sceneConfig) {
             return route.sceneConfig;
           }
-          return Navigator.SceneConfigs.HorizontalSwipeJump;
+          return Navigator.SceneConfigs.FadeAndroid;
         
         }} 
         navigationBar={

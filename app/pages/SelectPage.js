@@ -18,10 +18,32 @@ const mapStateToProps = (state) => ({
 
 class SelectPage extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      transitionOver: false
+    };
+  }
+
+  setTransitionOver() {
+    this.setState({
+      transitionOver: true
+    });
+  }
+
+
+  componentDidMount() {
+    this.didFocusSubscription = this.props.navigator.navigationContext.addListener('didfocus', this.setTransitionOver.bind(this));
+  }
+
+  componentWillUnmount() {
+    this.didFocusSubscription.remove();
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <PhotoGallery onDisplayImage={this.gotoNext.bind(this)}/>
+        { this.state.transitionOver && <PhotoGallery onDisplayImage={this.gotoNext.bind(this)}/>}
       </View>
     );
   }
