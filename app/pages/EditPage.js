@@ -7,6 +7,7 @@ import Header from '../components/Header'
 import { Surface } from "gl-react-native"
 const { Image: GLImage } = require("gl-react-image")
 var RNFS = require('react-native-fs');
+var Orientation = require('react-native-orientation');
 
 import AdjustFilter from '../components/filters/AdjustFilter'
 
@@ -68,10 +69,14 @@ class EditPage extends Component {
         transitionOver: true
       })
     });
+    Orientation.addOrientationListener(() => {
+      this.updateImageSize();
+    });
   }
 
   componentWillUnmount() {
     this.didFocusSubscription.remove();
+    Orientation.removeOrientationListener(this.orientationDidChange);
   }
 
   saveEditedImage() {
@@ -92,7 +97,6 @@ class EditPage extends Component {
     const { imageUrl } = this.props
     return (
       this.state.transitionOver && <ScrollView style={styles.container}>
-
         <Surface ref="surface" style={styles.cover} width={this.state.width} height={this.state.height}>
           <AdjustFilter
             saturation={this.state.saturation}
