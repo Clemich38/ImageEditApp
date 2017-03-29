@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
+import FitImage from 'react-native-fit-image';
 
 export default class PhotoGallery extends Component {
 
@@ -27,15 +28,11 @@ export default class PhotoGallery extends Component {
   }
 
   componentDidMount() {
-    // get photos from the device photo gallery
-    // CameraRoll.getPhotos(this.state.fetchParams, this.fetchImages, this.logError);
     this.displayGallery();
   }
 
+  // Get photos from the device photo gallery
   displayGallery() {
-    // get photos from the device photo gallery
-    // CameraRoll.getPhotos(this.state.fetchParams, this.fetchImages, this.logError);
-
     CameraRoll.getPhotos({
       first: 10,
       // groupTypes: 'SavedPhotos',
@@ -80,8 +77,8 @@ export default class PhotoGallery extends Component {
           <View style={styles.imageGrid}>
             {this.state.imagesArray.map((image, index) => {
               return (
-                <TouchableHighlight key={index} onPress={() => this.selectImage(image.uri)}>
-                  <Image style={styles.image} source={{ uri: image.uri }} />
+                <TouchableHighlight style={styles.imageWrap} key={index} onPress={() => this.selectImage(image.uri)}>
+                  <FitImage style={styles.image} source={{ uri: image.uri }} />
                 </TouchableHighlight>
               );
             })}
@@ -102,9 +99,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   image: {
+    margin: 10,
+  },
+  imageWrap: {
     width: 100,
     height: 100,
-    margin: 10,
   },
 });
 
