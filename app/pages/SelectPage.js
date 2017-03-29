@@ -56,7 +56,6 @@ class SelectPage extends Component {
 
 
 const styles = StyleSheet.create({
-  
   container: {
     marginTop: 65,
     flex: 1,

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Slider, CameraRoll, Button, StatusBar, Image, View, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, Navigator, BackAndroid } from 'react-native'
+import { PixelRatio, Dimensions, Slider, CameraRoll, Button, StatusBar, Image, View, ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, Navigator, BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import FitImage from 'react-native-fit-image';
@@ -50,11 +50,20 @@ class EditPage extends Component {
       mixFactor: 0 })
   }
 
+  updateImageSize() {
+    Image.getSize(this.props.imageUrl, (width, height) => {
+      let winWidth = Dimensions.get('window').width;
+      let newHeight = height * winWidth / width;
+      this.setState({
+        width: winWidth,
+        height: newHeight
+      });
+    });
+  }
+
   componentDidMount() {
     this.didFocusSubscription = this.props.navigator.navigationContext.addListener('didfocus', () => {
-      Image.getSize(this.props.imageUrl, (width, height) => {
-        this.setState({ width, height });
-      });
+      this.updateImageSize();
       this.setState({
         transitionOver: true
       })
@@ -69,7 +78,6 @@ class EditPage extends Component {
     const { imageUrl } = this.props
     var path = RNFS.DocumentDirectoryPath + '/image.png';
     this.refs.surface.captureFrame({ type: 'png', format: 'file', filePath: path, quality: 1 }).then(uri => {
-      console.log("DO SOMETHING WITH", uri);
       var promise = CameraRoll.saveToCameraRoll(uri, 'photo');
       promise.then(function (result) {
         console.log('save succeeded ' + result);
@@ -84,11 +92,8 @@ class EditPage extends Component {
     const { imageUrl } = this.props
     return (
       this.state.transitionOver && <ScrollView style={styles.container}>
-        <Text>
-          Size: {this.state.width}*{this.state.height}
-        </Text>
 
-        <Surface ref="surface" style={styles.cover} width={this.state.width/10} height={this.state.height/10}>
+        <Surface ref="surface" style={styles.cover} width={this.state.width} height={this.state.height}>
           <AdjustFilter
             saturation={this.state.saturation}
             brightness={this.state.brightness}
@@ -166,11 +171,6 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 64,
     flex: 1,
-  },
-  ScrollContainer: {
-    flex: 1,
-    paddingTop: 25,
-    paddingBottom: 25,
   },
   image: {
     resizeMode: "contain"
