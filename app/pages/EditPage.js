@@ -62,6 +62,10 @@ class EditPage extends Component {
     });
   }
 
+  orientationDidChange = () => {
+    this.updateImageSize();
+  }
+
   componentDidMount() {
     this.didFocusSubscription = this.props.navigator.navigationContext.addListener('didfocus', () => {
       this.updateImageSize();
@@ -69,9 +73,7 @@ class EditPage extends Component {
         transitionOver: true
       })
     });
-    Orientation.addOrientationListener(() => {
-      this.updateImageSize();
-    });
+    Orientation.addOrientationListener(this.orientationDidChange);
   }
 
   componentWillUnmount() {
