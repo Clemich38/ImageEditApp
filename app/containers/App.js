@@ -68,11 +68,7 @@ class App extends Component {
 
   noRoute(navigator) {
     return (
-      <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
-        <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
-          onPress={() => navigator.pop()}>
-          <Text style={{ color: 'red', fontWeight: 'bold' }}>请在 index.js 的 renderScene 中配置这个页面的路由</Text>
-        </TouchableOpacity>
+      <View>
       </View>
     );
   }
@@ -87,7 +83,7 @@ var NavigationBarRouteMapper = {
             navigator.pop();
           }
         }}>
-          <Text style={{ color: 'white', marginTop: 5, marginLeft: 10, fontSize: 12 }}>
+          <Text style={styles.back}>
             Back
         </Text>
         </TouchableOpacity>
@@ -101,8 +97,8 @@ var NavigationBarRouteMapper = {
   },
   Title(route, navigator, index, navState) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
-        <Text style={{ color: 'white', margin: 10, fontSize: 16 }}>
+      <View style={styles.titleCont}>
+        <Text style={styles.title}>
           Image Edition App
         </Text>
       </View>
@@ -114,16 +110,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  ScrollContainer: {
-    flex: 1,
-    paddingTop: 25,
-    paddingBottom: 25,
-  },
-  welcome: {
-    textAlign: 'center',
+  title: {
+    color: 'white',
     margin: 10,
+    fontSize: 16
   },
-  
+  titleCont: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  back: {
+    color: 'white',
+    marginTop: 5,
+    marginLeft: 10,
+    fontSize: 12
+  }
 })
 
 export default connect(mapStateToProps)(App)

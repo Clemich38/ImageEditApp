@@ -36,58 +36,12 @@ class Home extends Component {
       name: 'SelectPage',
     });
   }
-
-  /*render() {
-    return (
-      <Navigator
-        renderScene={this.renderScene.bind(this)}
-        navigationBar={
-          <Navigator.NavigationBar style={{ backgroundColor: 'lightsteelblue', alignItems: 'center' }}
-            routeMapper={NavigationBarRouteMapper} />
-        } />
-    );
-  }*/
 }
-
-
-var NavigationBarRouteMapper = {
-  LeftButton(route, navigator, index, navState) {
-    return null;
-  },
-  RightButton(route, navigator, index, navState) {
-    return null;
-  },
-  Title(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity style={{ flex: 1, justifyContent: 'center' }}>
-        <Text style={{ color: 'white', margin: 10, fontSize: 16 }}>
-          Home - Title
-        </Text>
-      </TouchableOpacity>
-    );
-  }
-};
-      /*<View style={styles.container}>
-        <Header>
-          Image Edition
-        </Header>
-        <PhotoGallery />
-      </View >*/
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  ScrollContainer: {
-    flex: 1,
-    paddingTop: 25,
-    paddingBottom: 25,
-  },
-  welcome: {
-    textAlign: 'center',
-    margin: 10,
-  },
-
 })
 
 export default connect(mapStateToProps)(Home)

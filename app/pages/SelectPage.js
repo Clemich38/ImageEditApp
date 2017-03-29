@@ -25,15 +25,11 @@ class SelectPage extends Component {
     };
   }
 
-  setTransitionOver() {
-    this.setState({
-      transitionOver: true
-    });
-  }
-
-
   componentDidMount() {
-    this.didFocusSubscription = this.props.navigator.navigationContext.addListener('didfocus', this.setTransitionOver.bind(this));
+    this.didFocusSubscription = this.props.navigator.navigationContext.addListener('didfocus', () => {
+      this.setState({
+        transitionOver: true
+      })});
   }
 
   componentWillUnmount() {
@@ -56,7 +52,6 @@ class SelectPage extends Component {
       name: 'EditPage',
     });
   }
-
 }
 
 
@@ -66,16 +61,6 @@ const styles = StyleSheet.create({
     marginTop: 65,
     flex: 1,
   },
-  ScrollContainer: {
-    flex: 1,
-    paddingTop: 25,
-    paddingBottom: 25,
-  },
-  welcome: {
-    textAlign: 'center',
-    margin: 10,
-  },
-
 })
 
 export default connect(mapStateToProps)(SelectPage)

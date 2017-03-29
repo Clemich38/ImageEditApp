@@ -37,13 +37,6 @@ class EditPage extends Component {
       width:1,
       height: 1,
       transitionOver: false};
-
-  }
-
-  setTransitionOver () {
-    this.setState({
-      transitionOver: true
-    });
   }
 
   resetState = () => {
@@ -58,11 +51,14 @@ class EditPage extends Component {
   }
 
   componentDidMount() {
-    Image.getSize(this.props.imageUrl, (width, height) => {
-      this.setState({ width, height });
+    this.didFocusSubscription = this.props.navigator.navigationContext.addListener('didfocus', () => {
+      Image.getSize(this.props.imageUrl, (width, height) => {
+        this.setState({ width, height });
+      });
+      this.setState({
+        transitionOver: true
+      })
     });
-
-    this.didFocusSubscription = this.props.navigator.navigationContext.addListener('didfocus', this.setTransitionOver.bind(this));
   }
 
   componentWillUnmount() {
