@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
   
   container: {
     flex: 1,
+    backgroundColor: 'dimgrey',
   },
   imageGrid: {
     flexDirection: 'row',

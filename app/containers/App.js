@@ -60,7 +60,7 @@ class App extends Component {
         
         }} 
         navigationBar={
-          <Navigator.NavigationBar style={{ backgroundColor: 'lightsteelblue', alignItems: 'center' }}
+          <Navigator.NavigationBar style={styles.nav}
             routeMapper={NavigationBarRouteMapper} />
         } />
     );
@@ -109,21 +109,27 @@ var NavigationBarRouteMapper = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'dimgrey'
   },
   title: {
-    color: 'white',
+    color: 'lightcyan',
     margin: 10,
-    fontSize: 16
+    fontSize: 18,
+    // fontWeight: 'bold',
   },
   titleCont: {
     flex: 1,
     justifyContent: 'center'
   },
   back: {
-    color: 'white',
+    color: 'lightcyan',
     marginTop: 5,
     marginLeft: 10,
     fontSize: 12
+  },
+  nav: {
+    backgroundColor: 'dimgrey',
+    alignItems: 'center'
   }
 })
 

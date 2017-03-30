@@ -38,8 +38,10 @@ class SelectPage extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        { this.state.transitionOver && <PhotoGallery onDisplayImage={this.gotoNext.bind(this)}/>}
+      <View style={styles.masterContainer}>
+        <View style={styles.container}>
+          { this.state.transitionOver && <PhotoGallery onDisplayImage={this.gotoNext.bind(this)}/>}
+        </View>
       </View>
     );
   }
@@ -56,7 +58,12 @@ class SelectPage extends Component {
 
 
 const styles = StyleSheet.create({
+  masterContainer: {
+    backgroundColor: 'dimgrey',
+    flex: 1,
+  },
   container: {
+    backgroundColor: 'dimgrey',
     marginTop: 65,
     flex: 1,
   },

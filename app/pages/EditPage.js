@@ -98,95 +98,115 @@ class EditPage extends Component {
   render() {
     const { imageUrl } = this.props
     return (
-      this.state.transitionOver && <ScrollView style={styles.container}>
-        <Surface ref="surface" style={styles.cover} width={this.state.width} height={this.state.height}>
-          <AdjustFilter
-            saturation={this.state.saturation}
-            brightness={this.state.brightness}
-            contrast={this.state.contrast}
-            hue={this.state.hue}
-            sepia={this.state.sepia}
-            gray={this.state.gray}
-            mixFactor={this.state.mixFactor}
-            image={{ uri: imageUrl }}
-          />
-        </Surface>
-        <View>
-          <Text>Saturation: {this.state.saturation}</Text>
-          <Slider
-            value={this.state.saturation}
-            minimumValue={0}
-            maximumValue={2}
-            onValueChange={(saturation) => this.setState({ saturation: saturation })}
-          />
-          <Text>brightness: {this.state.brightness}</Text>
-          <Slider
-            value={this.state.brightness}
-            minimumValue={0}
-            maximumValue={2}
-            onValueChange={(brightness) => this.setState({ brightness: brightness })}
-          />
-          <Text>contrast: {this.state.contrast}</Text>
-          <Slider
-            value={this.state.contrast}
-            minimumValue={0}
-            maximumValue={2}
-            onValueChange={(contrast) => this.setState({ contrast: contrast })}
-          />
-          <Text>hue: {this.state.hue}</Text>
-          <Slider
-            value={this.state.hue}
-            minimumValue={0}
-            maximumValue={6}
-            onValueChange={(hue) => this.setState({ hue: hue })}
-          />
-          <Text>sepia: {this.state.sepia}</Text>
-          <Slider
-            value={this.state.sepia}
-            minimumValue={0}
-            maximumValue={1}
-            onValueChange={(sepia) => this.setState({ sepia: sepia })}
-          />
-          <Text>gray: {this.state.gray}</Text>
-          <Slider
-            value={this.state.gray}
-            minimumValue={0}
-            maximumValue={1}
-            onValueChange={(gray) => this.setState({ gray: gray })}
-          />
-        </View>
-        <Button
-          title="Save"
-          color="lightsteelblue"
-          onPress={this.saveEditedImage.bind(this)}
-        />
-        <Button
-          title="Reset"
-          color="lightsteelblue"
-          onPress={this.resetState}
-        />
-        {/*<FitImage style={styles.image} source={{ uri: 'assets-library://asset/asset.JPG?id=9F983DBA-EC35-42B8-8773-B597CF782EDD&ext=JPG' }} />*/}
-      </ScrollView>
-      
+      <View style={styles.masterContainer}>
+        { this.state.transitionOver && <ScrollView style={styles.container}>
+          <Surface ref="surface" style={styles.cover} width={this.state.width} height={this.state.height}>
+            <AdjustFilter
+              saturation={this.state.saturation}
+              brightness={this.state.brightness}
+              contrast={this.state.contrast}
+              hue={this.state.hue}
+              sepia={this.state.sepia}
+              gray={this.state.gray}
+              mixFactor={this.state.mixFactor}
+              image={{ uri: imageUrl }}
+            />
+          </Surface>
+          <View style={styles.effectView}>
+              <Text style={styles.text}>Saturation: {this.state.saturation.toFixed(2)}</Text>
+              <Slider
+                value={this.state.saturation}
+                minimumValue={0}
+                maximumValue={2}
+                onValueChange={(saturation) => this.setState({ saturation: saturation })}
+              />
+              <Text style={styles.text}>Brightness: {this.state.brightness.toFixed(2)}</Text>
+            <Slider
+              value={this.state.brightness}
+              minimumValue={0}
+              maximumValue={2}
+              onValueChange={(brightness) => this.setState({ brightness: brightness })}
+            />
+            <Text style={styles.text}>Contrast: {this.state.contrast.toFixed(2)}</Text>
+            <Slider
+              value={this.state.contrast}
+              minimumValue={0}
+              maximumValue={2}
+              onValueChange={(contrast) => this.setState({ contrast: contrast })}
+            />
+            <Text style={styles.text}>Hue: {this.state.hue.toFixed(2)}</Text>
+            <Slider
+              value={this.state.hue}
+              minimumValue={0}
+              maximumValue={6}
+              onValueChange={(hue) => this.setState({ hue: hue })}
+            />
+            <Text style={styles.text}>Sepia: {this.state.sepia.toFixed(2)}</Text>
+            <Slider
+              value={this.state.sepia}
+              minimumValue={0}
+              maximumValue={1}
+              onValueChange={(sepia) => this.setState({ sepia: sepia })}
+            />
+            <Text style={styles.text}>Gray: {this.state.gray.toFixed(2)}</Text>
+            <Slider
+              value={this.state.gray}
+              minimumValue={0}
+              maximumValue={1}
+              onValueChange={(gray) => this.setState({ gray: gray })}
+            />
+            <Button
+              title="Save"
+              style={styles.button}
+              color='lightcyan'
+              onPress={this.saveEditedImage.bind(this)}
+            />
+            <Button
+              title="Reset"
+              style={styles.button}
+              color='lightcyan'
+              onPress={this.resetState}
+            />
+          </View>
+          {/*<FitImage style={styles.image} source={{ uri: 'assets-library://asset/asset.JPG?id=9F983DBA-EC35-42B8-8773-B597CF782EDD&ext=JPG' }} />*/}
+        </ScrollView>
+        }
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-
+  masterContainer: {
+    backgroundColor: 'dimgrey',
+    flex: 1,
+  },
   container: {
+    backgroundColor: 'dimgrey',
     marginTop: 64,
     flex: 1,
+  },
+  effectView: {
+    backgroundColor: 'dimgrey',
+    paddingTop: 15,
+    paddingLeft: 25,
+    paddingRight: 25,
+    paddingBottom: 20
   },
   image: {
     resizeMode: "contain"
   },
   cover: {
-    // position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
+  },
+  text: {
+    color: 'lightcyan',
+  },
+  button: {
+    marginTop: 5,
   }
 
 })

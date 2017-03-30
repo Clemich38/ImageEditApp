@@ -20,10 +20,10 @@ class Home extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={styles.container}>
         <Button
           title="Select Picture"
-          color="lightsteelblue"
+          color="lightcyan"
           onPress={this.gotoNext.bind(this)}
         />
       </View>
@@ -41,6 +41,9 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'dimgrey',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 })
 
