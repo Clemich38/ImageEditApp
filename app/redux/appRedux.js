@@ -13,7 +13,6 @@ const initialState = {
 
 }
 
-
 export const reducer = (state = initialState, action) => {
   const { imageUrl } = state
   const { type, payload } = action
